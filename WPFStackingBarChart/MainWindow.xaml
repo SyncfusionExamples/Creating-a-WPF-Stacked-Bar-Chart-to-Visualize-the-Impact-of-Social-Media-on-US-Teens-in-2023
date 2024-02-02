@@ -1,0 +1,100 @@
+﻿<Window x:Class="WPFStackingBarChart.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:chart="clr-namespace:Syncfusion.UI.Xaml.Charts;assembly=Syncfusion.SfChart.WPF"
+        xmlns:local="clr-namespace:WPFStackingBarChart"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid x:Name="grid">
+        <Grid.DataContext>
+            <local:ViewModel />
+        </Grid.DataContext>
+        <Grid.Resources>
+            <DataTemplate x:Key="tooltipTemplate">
+                <StackPanel  Orientation="Horizontal">
+                        <TextBlock Text="{Binding Series.Label}"
+                    Foreground="White" FontWeight="Medium" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Text=" : " Foreground="White" FontWeight="Medium" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding YData,StringFormat='###'}"
+                    Foreground="White" FontWeight="Medium" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </DataTemplate>
+        </Grid.Resources>
+
+        <Border Margin="30" Padding="10" BorderThickness="1.5" CornerRadius="10" BorderBrush="#8d8794">
+
+            <chart:SfChart  HorizontalHeaderAlignment="Left" >
+
+                <chart:SfChart.Header>
+                    <Border BorderBrush="White" Margin="0, 0, 0, 10">
+                        <StackPanel Orientation="Horizontal">
+                            <Grid Width="10" Background="#002748" Margin="0, 8, 0, 5"/>
+                            <StackPanel>
+                                <TextBlock FontSize="18" Margin="5" 
+		                            Text="Teenage Digital Engagement in the US 2023"/>
+                                <TextBlock FontSize="13" Margin="5" 
+                                    Text="% of U.S. teens age 13 to 17 who report visiting or using the following apps or sites ..."/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </chart:SfChart.Header>
+
+
+
+                <chart:SfChart.Legend>
+                    <chart:ChartLegend DockPosition="Bottom"  IconHeight="14" IconWidth="14" FontSize="13"  HorizontalAlignment="Left"/>
+                </chart:SfChart.Legend>
+            <!--Initialize the axis for chart-->
+                <chart:SfChart.PrimaryAxis>
+                    <chart:CategoryAxis  ShowGridLines="False" LabelPlacement="BetweenTicks" FontSize="13" TickLineSize="0" IsInversed="True" >
+                       
+                    </chart:CategoryAxis>
+                </chart:SfChart.PrimaryAxis>
+
+                <chart:SfChart.SecondaryAxis>
+                    <chart:NumericalAxis ShowGridLines="False" Visibility="Collapsed" >
+                    </chart:NumericalAxis>
+                </chart:SfChart.SecondaryAxis>
+                <chart:SfChart.Behaviors>
+                    <chart:ChartTooltipBehavior VerticalOffset="-10" >
+                       
+                    </chart:ChartTooltipBehavior>
+                </chart:SfChart.Behaviors>
+
+                <chart:StackingBarSeries TooltipTemplate="{StaticResource tooltipTemplate}" ShowTooltip="True" SegmentSpacing="0.25"  Label="Almost constantly" Interior="#002748" ItemsSource="{Binding Collection}" XBindingPath="Category" YBindingPath="AlmostConstantly" >
+                    <chart:StackingBarSeries.AdornmentsInfo>
+                        <chart:ChartAdornmentInfo AdornmentsPosition="TopAndBottom" ShowLabel="True"/>
+                    </chart:StackingBarSeries.AdornmentsInfo>
+                </chart:StackingBarSeries>
+                <chart:StackingBarSeries TooltipTemplate="{StaticResource tooltipTemplate}" ShowTooltip="True" SegmentSpacing="0.25" Label="Several times a day"  Interior="#004a75" ItemsSource="{Binding Collection}" XBindingPath="Category" YBindingPath="SeveralTimesADay" >
+                    <chart:StackingBarSeries.AdornmentsInfo>
+                        <chart:ChartAdornmentInfo AdornmentsPosition="TopAndBottom" ShowLabel="True"/>
+                    </chart:StackingBarSeries.AdornmentsInfo>
+                </chart:StackingBarSeries>
+                <chart:StackingBarSeries TooltipTemplate="{StaticResource tooltipTemplate}" ShowTooltip="True" SegmentSpacing="0.25" Label="About once a day"  Interior="#006699" ItemsSource="{Binding Collection}" XBindingPath="Category" YBindingPath="AboutOnceADay" >
+                    <chart:StackingBarSeries.AdornmentsInfo>
+                        <chart:ChartAdornmentInfo AdornmentsPosition="TopAndBottom" ShowLabel="True"/>
+                    </chart:StackingBarSeries.AdornmentsInfo>
+                </chart:StackingBarSeries>
+                <chart:StackingBarSeries TooltipTemplate="{StaticResource tooltipTemplate}" ShowTooltip="True" SegmentSpacing="0.25" Label="Several times a week"  Interior="#7591b7" ItemsSource="{Binding Collection}" XBindingPath="Category" YBindingPath="SeveralTimesAWeek" >
+                    <chart:StackingBarSeries.AdornmentsInfo>
+                        <chart:ChartAdornmentInfo AdornmentsPosition="TopAndBottom" ShowLabel="True"/>
+                    </chart:StackingBarSeries.AdornmentsInfo>
+                </chart:StackingBarSeries>
+                <chart:StackingBarSeries TooltipTemplate="{StaticResource tooltipTemplate}" ShowTooltip="True" SegmentSpacing="0.25" Label="Less often"  Interior="#9daecb" ItemsSource="{Binding Collection}" XBindingPath="Category" YBindingPath="LessOften" >
+                    <chart:StackingBarSeries.AdornmentsInfo>
+                        <chart:ChartAdornmentInfo AdornmentsPosition="TopAndBottom" ShowLabel="True"/>
+                    </chart:StackingBarSeries.AdornmentsInfo>
+                </chart:StackingBarSeries>
+                <chart:StackingBarSeries TooltipTemplate="{StaticResource tooltipTemplate}" ShowTooltip="True" SegmentSpacing="0.25" Label="Do not use"  Interior="#c9d1e1" ItemsSource="{Binding Collection}" XBindingPath="Category" YBindingPath="DoNotUse">
+                    <chart:StackingBarSeries.AdornmentsInfo>
+                        <chart:ChartAdornmentInfo AdornmentsPosition="TopAndBottom" ShowLabel="True"/>
+                    </chart:StackingBarSeries.AdornmentsInfo>
+                </chart:StackingBarSeries>
+
+            </chart:SfChart>
+        </Border>
+    </Grid>
+</Window>
